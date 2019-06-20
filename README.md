@@ -2,6 +2,8 @@
 
 A wizard for comparing GitHub forks.
 
+Will become useless once GitHub displays the number of ahead/behind commits on the Forks page!
+
 ## Problem
 
 [StackOverflow: How to determine which forks on GitHub are ahead?](https://stackoverflow.com/questions/54868988/how-to-determine-which-forks-on-github-are-ahead)
