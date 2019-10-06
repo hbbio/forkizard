@@ -65,6 +65,10 @@ func compareRepo(fork string) (int, int) {
 }
 
 func main() {
+	if (len(os.Args) < 2) {
+		os.Stderr.WriteString("Usage: forkizard owner/repo\n")
+		os.Exit(1)
+	}
 	forks := listForks(os.Args[1])
 	mahead := make(map[string]int)
 	mbehind := make(map[string]int)
