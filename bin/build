@@ -6,7 +6,7 @@ docker run \
   -it \
   -v $(pwd):$(pwd) \
   -w $(pwd) \
-  golang:1.13-alpine \
+  golang:1.13 \
   go build
 
 echo Built $(pwd)/forkizard
