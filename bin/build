@@ -3,7 +3,7 @@ set -o nounset -o errexit -o pipefail
 
 docker run \
   --rm \
-  -it \
+  -i \
   -v $(pwd):$(pwd) \
   -w $(pwd) \
   golang:1.13 \
