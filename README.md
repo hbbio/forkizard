@@ -31,6 +31,14 @@ done
 /wangkechun/pp     +2 -57
 ```
 
+## Building with Docker
+
+To build without installing golang, run:
+
+```
+bin/build
+```
+
 ## Bugs
 
 Current version might not compare subforks well.
