@@ -1,9 +1,26 @@
 #!/bin/bash
 set -o nounset -o errexit -o pipefail
 
+# Detect OS
+export GOOS=$(uname | awk '{print tolower($0)}')
+
+# Detect architecture
+arch=$(uname -m)
+case $arch in
+i686)
+    export GOARCH=386
+    ;;
+x86_64)
+    export GOARCH=amd64
+    ;;
+esac
+
+# Build
 docker run \
   --rm \
   -i \
+  -e GOOS=$GOOS \
+  -e GOARCH=$GOARCH \
   -v $(pwd):$(pwd) \
   -w $(pwd) \
   golang:1.13 \
