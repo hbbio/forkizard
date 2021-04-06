@@ -49,7 +49,7 @@ func compareRepo(fork string) (int, int) {
 	ahead := -1
 	behind := -1
 	c := colly.NewCollector()
-	c.OnHTML(".branch-infobar", func(e *colly.HTMLElement) {
+	c.OnHTML(".flex-auto.d-flex", func(e *colly.HTMLElement) {
 		// Only considering forks ahead.
 		if strings.Contains(e.Text, "ahead") {
 			match := re.FindStringSubmatch(e.Text)
@@ -84,11 +84,15 @@ func main() {
 		}
 	}
 	bar.FinishPrint("done")
-	iter, _ := sm.IterCh()
-	w := tabwriter.NewWriter(os.Stdout, 0, 0, 1, ' ', 0)
-	for rec := range iter.Records() {
-		key := rec.Key.(string)
-		fmt.Fprintln(w, fmt.Sprintf("%s\t+%d -%d", key, mahead[key], mbehind[key]))
-	}
-	w.Flush()
+	iter, err := sm.IterCh()
+	if (err != nil) {
+		bar.FinishPrint(err.Error())
+	} else {
+		w := tabwriter.NewWriter(os.Stdout, 0, 0, 1, ' ', 0)
+		for rec := range iter.Records() {
+			key := rec.Key.(string)
+			fmt.Fprintln(w, fmt.Sprintf("%s\t+%d -%d", key, mahead[key], mbehind[key]))
+		}
+		w.Flush()
+    }
 }
